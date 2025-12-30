@@ -3,10 +3,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.gradle.maven.publish)
 }
 
 group = "dev.vicart.kotp"
-version = "0.0.1"
+version = "0.0.1-SNAPSHOT"
 
 kotlin {
     val host = System.getProperty("os.name").lowercase()
@@ -35,12 +36,10 @@ kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_1_8
         }
-        withSourcesJar()
     }
 
     wasmJs {
         outputModuleName = "kotp"
-        withSourcesJar()
 
         browser()
         nodejs()
@@ -51,7 +50,6 @@ kotlin {
 
     js {
         outputModuleName = "kotp"
-        withSourcesJar()
 
         browser()
         nodejs()
@@ -66,6 +64,39 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
+        }
+    }
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+
+    signAllPublications()
+
+    coordinates(group.toString(), project.name, version.toString())
+
+    pom {
+        name = "kotp library"
+        description = "A Kotlin Multiplatform library for HOTP and TOTP code generation"
+        url = "https://github.com/ClementVicart/kotp"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://raw.githubusercontent.com/ClementVicart/kotp/refs/heads/main/LICENSE"
+                distribution = "https://raw.githubusercontent.com/ClementVicart/kotp/refs/heads/main/LICENSE"
+            }
+        }
+        developers {
+            developer {
+                id = "clement-vicart"
+                name = "Clément Vicart"
+                url = "https://github.com/ClementVicart"
+            }
+        }
+        scm {
+            url = "https://github.com/ClementVicart/kotp"
+            connection = "scm:git:git://github.com/ClementVicart/kotp.git"
+            developerConnection = "scm:git:git://github.com/ClementVicart/kotp.git"
         }
     }
 }
