@@ -3,11 +3,12 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.gradle.maven.publish)
 }
 
 group = "dev.vicart.kotp"
-version = "0.0.1"
+version = "0.0.2"
 
 kotlin {
     val host = System.getProperty("os.name").lowercase()
@@ -55,6 +56,15 @@ kotlin {
         nodejs()
 
         binaries.library()
+    }
+
+    androidLibrary {
+        namespace = "dev.vicart.kotp"
+        compileSdk = 36
+
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
     }
 
     sourceSets {
