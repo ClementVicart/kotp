@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.vicart.kotp"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 kotlin {
     val host = System.getProperty("os.name").lowercase()

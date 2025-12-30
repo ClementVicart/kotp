@@ -45,7 +45,7 @@ For multiplatform project:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("dev.vicart.kotp:kotp:0.0.1-SNAPSHOT")
+            implementation("dev.vicart.kotp:kotp:0.0.1")
         }
     }
 }
@@ -54,7 +54,7 @@ kotlin {
 For other platforms:
 ```kotlin
 dependencies {
-    implementation("dev.vicart.kotp:kotp:0.0.1-SNAPSHOT")
+    implementation("dev.vicart.kotp:kotp:0.0.1")
 }
 ```
 
@@ -64,7 +64,7 @@ dependencies {
 <dependency>
     <groupId>dev.vicart.kotp</groupId>
     <artifactId>kotp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 </dependency>
 ```
 
