@@ -6,8 +6,8 @@ It is an implementation
 of the [RFC 4226](https://datatracker.ietf.org/doc/html/rfc4226) and the [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238)
 and provides:
 
-* HMAC-Based One-Time Password (HOTP)
-* Time-Based One-Time Password (TOTP)
+* HMAC-based One-Time Password (HOTP)
+* Time-based One-Time Password (TOTP)
 
 The multiplatform library currently supports:
 
@@ -30,7 +30,9 @@ Planned support:
   * [HOTP](#hotp)
   * [TOTP](#totp)
 * [Usage](#usage)
-  * [HMAC-Based One-Time Password generation](#hmac-based-one-time-password-generation)
+  * [HMAC-based One-Time Password generation](#hmac-based-one-time-password-generation)
+  * [Time-based One-Time Password generation](#time-based-one-time-password-generation)
+* [Documentation](#documentation)
 
 ### Dependency
 
@@ -68,7 +70,7 @@ dependencies {
 
 ### HOTP vs TOTP
 
-HMAC-Based One-Time Password (HOTP) and Time-Based One-Time Password (TOTP) are two methods of generating one-time passwords.
+HMAC-based One-Time Password (HOTP) and Time-based One-Time Password (TOTP) are two methods of generating one-time passwords.
 Their goal is to provide a 2FA solution for securing access to sensitive data. Both of them are based on a **secret key** and a **counter**
 and use a [HMAC function](https://datatracker.ietf.org/doc/html/rfc2104) to generate a unique password.
 The **secret key** is usually a Base32-encoded string provided by the server.
@@ -87,7 +89,7 @@ check the provided code against the previous and the next time interval for erro
 
 ### Usage
 
-#### HMAC-Based One-Time Password generation
+#### HMAC-based One-Time Password generation
 
 ```kotlin
 val configuration = HmacOneTimePasswordConfiguration(
@@ -102,7 +104,21 @@ val counter = 0
 val code = generator.generateCode(counter) //Returns "123456" for example
 ```
 
-#### Time-Based One-Time Password generation
+#### Time-based One-Time Password generation
 
 ```kotlin
+val configuration = TimeOneTimePasswordConfiguration(
+    secret = <encoded secret>,
+    digits = 6,
+    hmacAlgorithm = HmacAlgorithm.SHA1,
+    timeStep = 30.seconds
+)
+
+val generator = TimeOneTimePasswordGenerator(configuration)
+
+val code = generator.generateCode() //Returns "123456" for example
 ```
+
+### Documentation
+
+You can find the documentation [here](https://clementvicart.github.io/kotp)

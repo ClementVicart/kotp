@@ -4,10 +4,12 @@ kotlin-crypto = "0.8.0"
 kotlinx = "0.8.2"
 dokka = "2.1.0"
 publish = "0.35.0"
+datetime = "0.7.1"
 
 [libraries]
 kotlincrypto-hmac-sha1 = { module = "org.kotlincrypto.macs:hmac-sha1", version.ref = "kotlin-crypto" }
 kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlinx" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

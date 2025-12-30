@@ -61,6 +61,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlincrypto.hmac.sha1)
             implementation(libs.kotlinx.io.core)
+            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
