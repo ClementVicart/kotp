@@ -1,0 +1,33 @@
+name: Deploy documentation
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    name: Build doc and deploy on GH pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+      - uses: actions/setup-java@v5
+        with:
+          java-version: 25
+          distribution: temurin
+        name: Setup Java
+      - run: chmod +x ./gradlew
+        name: Set gradlew executable
+      - run: ./gradlew dokkaGenerateHtml
+      - uses: actions/configure-pages@v5
+        name: Configure Pages
+      - uses: actions/upload-pages-artifact@v3
+        name: Upload doc
+        with:
+          path: 'build/dokka/html'
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        name: Deploy Pages
