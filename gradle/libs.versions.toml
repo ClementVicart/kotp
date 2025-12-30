@@ -1,0 +1,13 @@
+[versions]
+kotlin = "2.3.0"
+kotlin-crypto = "0.8.0"
+kotlinx = "0.8.2"
+dokka = "2.1.0"
+
+[libraries]
+kotlincrypto-hmac-sha1 = { module = "org.kotlincrypto.macs:hmac-sha1", version.ref = "kotlin-crypto" }
+kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlinx" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
