@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)
@@ -29,7 +31,33 @@ kotlin {
         binaries.sharedLib()
     }
 
-    jvm()
+    jvm {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
+        }
+        withSourcesJar()
+    }
+
+    wasmJs {
+        outputModuleName = "kotp"
+        withSourcesJar()
+
+        browser()
+        nodejs()
+        d8()
+
+        binaries.library()
+    }
+
+    js {
+        outputModuleName = "kotp"
+        withSourcesJar()
+
+        browser()
+        nodejs()
+
+        binaries.library()
+    }
 
     sourceSets {
         commonMain.dependencies {
